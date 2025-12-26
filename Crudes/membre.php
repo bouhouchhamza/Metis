@@ -9,7 +9,7 @@ function ajouterMembre(Membre $membre)
     $db = new Database();
     $pdo = $db->pdo;
 
-    $sql = "INSERT INTO membres (nom, email) VALUES (:nom, :email)";
+    $sql = "INSERT INTO membre (nom, email) VALUES (:nom, :email)";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
         "nom"   => $membre->getNom(),
@@ -25,7 +25,7 @@ function afficherMembres()
     $db = new Database();
     $pdo = $db->pdo;
 
-    $sql = "SELECT * FROM membres";
+    $sql = "SELECT * FROM membre";
     $stmt = $pdo->query($sql);
 
     $membres = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -41,7 +41,7 @@ function modifierMembre($id, $nom, $email)
     $db = new Database();
     $pdo = $db->pdo;
 
-    $sql = "UPDATE membres SET nom = :nom, email = :email WHERE id = :id";
+    $sql = "UPDATE membre SET nom = :nom, email = :email WHERE id = :id";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
         "id"    => $id,
@@ -59,7 +59,7 @@ function supprimerMembre($id)
     $pdo = $db->pdo;
 
     
-    $check = $pdo->prepare("SELECT COUNT(*) FROM projets WHERE membre_id = :id");
+    $check = $pdo->prepare("SELECT COUNT(*) FROM projet WHERE membre_id = :id");
     $check->execute(["id" => $id]);
     $count = $check->fetchColumn();
 
@@ -68,7 +68,7 @@ function supprimerMembre($id)
         return;
     }
 
-    $sql = "DELETE FROM membres WHERE id = :id";
+    $sql = "DELETE FROM membre WHERE id = :id";
     $stmt = $pdo->prepare($sql);
     $stmt->execute(["id" => $id]);
 
