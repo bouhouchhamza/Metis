@@ -7,7 +7,7 @@ class Database {
     public function __construct() {
 
         $host = "localhost";
-        $dbname = "metis";
+        $dbname = "metise";
         $user = "root";
         $pass = "";
 
